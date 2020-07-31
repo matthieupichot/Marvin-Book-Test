@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -23,13 +24,38 @@ android {
     }
 }
 
+def lifeCycleExtensionsVersion = '1.1.1'
+def supportVersion = '1.1.0'
+def retrofitVersion = '2.3.0'
+def daggerVersion = '2.13'
+def junitVersion = '4.12'
+def rxJavaVersion = '2.0.1'
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.appcompat:appcompat:$supportVersion"
+    implementation "com.google.android.material:material:$supportVersion"
+    implementation "androidx.recyclerview:recyclerview:$supportVersion"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionsVersion"
+
+    testImplementation "junit:junit:$junitVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 

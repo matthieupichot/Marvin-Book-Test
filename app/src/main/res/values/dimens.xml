@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_splash_margin_top">298dp</dimen>
+    <dimen name="activity_login_margin_top">220dp</dimen>
+    <dimen name="text_input_width">290dp</dimen>
+    <dimen name="text_input_height">51dp</dimen>
+    <dimen name="login_button_width">213dp</dimen>
+    <dimen name="login_button_height">48dp</dimen>
 </resources>

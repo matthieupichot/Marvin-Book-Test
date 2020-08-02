@@ -6,4 +6,6 @@
     <string name="book">Livres</string>
     <string name="favorites">Favoris</string>
     <string name="profile">Profil</string>
+    <string name="best_seller">Best Seller</string>
+    <string name="book_title">Tome %1$s - %2$s!</string>
 </resources>

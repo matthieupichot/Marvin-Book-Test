@@ -6,4 +6,6 @@
     <dimen name="text_input_height">51dp</dimen>
     <dimen name="login_button_width">213dp</dimen>
     <dimen name="login_button_height">48dp</dimen>
+    <dimen name="home_margin_start">30dp</dimen>
+    <dimen name="home_margin_end">8dp</dimen>
 </resources>

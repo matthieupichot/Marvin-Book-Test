@@ -9,9 +9,9 @@
         android:id="@+id/recycler_view_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/home_margin_start"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="@dimen/home_margin_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

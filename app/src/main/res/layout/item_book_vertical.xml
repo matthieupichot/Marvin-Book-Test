@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimaryDark"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/img_book_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
@@ -21,7 +21,9 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:fontFamily="@font/montserrat"
-        app:layout_constraintStart_toEndOf="@+id/image"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="@dimen/home_margin_end"
+        app:layout_constraintStart_toEndOf="@+id/img_book_vertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Titre" />
 
@@ -31,7 +33,7 @@
     android:layout_height="wrap_content"
     android:textColor="@color/white"
     android:fontFamily="@font/montserrat"
-    app:layout_constraintStart_toEndOf="@+id/image"
+    app:layout_constraintStart_toStartOf="@+id/title"
     app:layout_constraintTop_toBottomOf="@+id/title"
     tools:text="Auteur" />
 
@@ -40,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/bt_mark_default"
-        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@+id/img_book_vertical"
         app:layout_constraintTop_toBottomOf="@+id/author" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

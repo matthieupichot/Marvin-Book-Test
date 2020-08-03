@@ -41,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login.observe(this, Observer {
             when (it) {
                 Constants.LOGIN_SUCCESSFUL -> {
+                    sharedPreferences.saveLoginStatus(true)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     finish()
                 }

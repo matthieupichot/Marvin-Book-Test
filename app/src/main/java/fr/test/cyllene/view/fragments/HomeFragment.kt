@@ -1,5 +1,6 @@
 package fr.test.cyllene.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.test.cyllene.R
 import fr.test.cyllene.model.Book
-import fr.test.cyllene.view.adapter.BookListHorizontalAdapater
+import fr.test.cyllene.view.activities.DetailActivity
+import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
 import fr.test.cyllene.view.adapter.BookListVerticalAdapter
 import fr.test.cyllene.view.adapter.ItemListener
 import fr.test.cyllene.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -36,7 +39,7 @@ class HomeFragment : Fragment(), ItemListener {
         viewModel.getBooks()
         recycler_view_home_horizontal.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = BookListHorizontalAdapater(
+            adapter = BookListHorizontalAdapter(
                 emptyList(),
                 this@HomeFragment
             )
@@ -62,7 +65,7 @@ class HomeFragment : Fragment(), ItemListener {
 
     private fun updateView(bookList : List<Book>) {
         recycler_view_home_horizontal.adapter =
-            BookListHorizontalAdapater(
+            BookListHorizontalAdapter(
                 bookList,
                 this
             )
@@ -74,7 +77,8 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
     override fun onClick(position: Int) {
-
+        val intent = Intent(activity, DetailActivity::class.java)
+        startActivity(intent)
     }
 
 }

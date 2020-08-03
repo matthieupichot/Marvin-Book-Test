@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 loadFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
-
             R.id.navigation_profile -> {
                 val fragment = FavoriteFragment()
                 loadFragment(fragment)

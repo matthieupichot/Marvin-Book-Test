@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import fr.test.cyllene.R
+import fr.test.cyllene.database.AppDatabase
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.utils.SharedPreferences
 import fr.test.cyllene.view.Application

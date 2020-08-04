@@ -11,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.test.cyllene.R
+import fr.test.cyllene.database.AppDatabase
 import fr.test.cyllene.model.Book
+import fr.test.cyllene.view.Application
 import fr.test.cyllene.view.activities.DetailActivity
 import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
 import fr.test.cyllene.view.adapter.BookListVerticalAdapter
@@ -19,11 +21,20 @@ import fr.test.cyllene.view.adapter.ItemListener
 import fr.test.cyllene.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import javax.inject.Inject
 
 
 class HomeFragment : Fragment(), ItemListener {
 
     private lateinit var viewModel: HomeViewModel
+
+    @Inject
+    lateinit var appDatabase: AppDatabase
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Application.roomComponent.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -56,6 +67,9 @@ class HomeFragment : Fragment(), ItemListener {
 
     private fun observeViewModel() {
         viewModel.data.observe(this, Observer {
+            Thread {
+                viewModel.insertBooks(it, appDatabase)
+            }.start()
             updateView(it)
         })
         viewModel.error.observe(this, Observer {

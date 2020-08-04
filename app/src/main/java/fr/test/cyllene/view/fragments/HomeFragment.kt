@@ -11,14 +11,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.test.cyllene.R
-import fr.test.cyllene.database.AppDatabase
+import fr.test.cyllene.database.BookDao
 import fr.test.cyllene.model.Book
+import fr.test.cyllene.repository.Repository
 import fr.test.cyllene.view.Application
 import fr.test.cyllene.view.activities.DetailActivity
 import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
 import fr.test.cyllene.view.adapter.BookListVerticalAdapter
 import fr.test.cyllene.view.adapter.ItemListener
 import fr.test.cyllene.viewmodel.HomeViewModel
+import fr.test.cyllene.viewmodel.HomeViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
@@ -28,7 +30,7 @@ class HomeFragment : Fragment(), ItemListener {
     private lateinit var viewModel: HomeViewModel
 
     @Inject
-    lateinit var appDatabase: AppDatabase
+    lateinit var bookDao: BookDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,13 @@ class HomeFragment : Fragment(), ItemListener {
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        val factory =
+            HomeViewModelFactory(
+                Repository(
+                    bookDao
+                )
+            )
+        viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
         setupViews()
     }
 
@@ -65,13 +73,13 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
     private fun observeViewModel() {
-        viewModel.data.observe(this, Observer {
+        viewModel.data.observe(viewLifecycleOwner, Observer {
             Thread {
-                viewModel.insertBooks(it, appDatabase)
+                viewModel.insertBooks(it)
             }.start()
             updateView(it)
         })
-        viewModel.error.observe(this, Observer {
+        viewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
         })
     }

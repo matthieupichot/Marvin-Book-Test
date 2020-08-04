@@ -3,7 +3,6 @@ package fr.test.cyllene.view
 import android.app.Application
 import com.facebook.stetho.Stetho
 import fr.test.cyllene.di.components.*
-import fr.test.cyllene.di.modules.ApiModule
 import fr.test.cyllene.di.modules.RoomModule
 import fr.test.cyllene.di.modules.SharedPreferencesModule
 

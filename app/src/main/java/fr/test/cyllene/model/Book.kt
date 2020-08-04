@@ -7,7 +7,9 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Book (
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @SerializedName("id")
+    val id : String,
     @SerializedName("volume")
     val volume: Int,
     @SerializedName("title")

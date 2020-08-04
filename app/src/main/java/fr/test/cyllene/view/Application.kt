@@ -2,10 +2,8 @@ package fr.test.cyllene.view
 
 import android.app.Application
 import com.facebook.stetho.Stetho
-import fr.test.cyllene.di.components.DaggerRoomComponent
-import fr.test.cyllene.di.components.DaggerSharedPreferencesComponent
-import fr.test.cyllene.di.components.RoomComponent
-import fr.test.cyllene.di.components.SharedPreferencesComponent
+import fr.test.cyllene.di.components.*
+import fr.test.cyllene.di.modules.ApiModule
 import fr.test.cyllene.di.modules.RoomModule
 import fr.test.cyllene.di.modules.SharedPreferencesModule
 

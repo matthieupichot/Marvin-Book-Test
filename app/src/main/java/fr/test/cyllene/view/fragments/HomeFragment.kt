@@ -19,7 +19,6 @@ import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
 import fr.test.cyllene.view.adapter.BookListVerticalAdapter
 import fr.test.cyllene.view.adapter.ItemListener
 import fr.test.cyllene.viewmodel.HomeViewModel
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 

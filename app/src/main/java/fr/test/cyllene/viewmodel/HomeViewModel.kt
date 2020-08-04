@@ -3,21 +3,20 @@ package fr.test.cyllene.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import fr.test.cyllene.api.BookService
 import fr.test.cyllene.database.AppDatabase
 import fr.test.cyllene.di.components.DaggerApiComponent
 import fr.test.cyllene.model.Book
+import fr.test.cyllene.repository.Repository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class HomeViewModel : ViewModel() {
 
     @Inject
-    lateinit var bookService : BookService
+    lateinit var repository: Repository
 
     init {
         DaggerApiComponent.create().inject(this)
@@ -29,7 +28,7 @@ class HomeViewModel : ViewModel() {
 
     fun getBooks(){
         disposable.add(
-            bookService.api.getBooks()
+            repository.getBooks()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Book>>(){

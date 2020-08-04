@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import fr.test.cyllene.api.ApiService
 import fr.test.cyllene.api.BookService
+import fr.test.cyllene.repository.Repository
 
 import fr.test.cyllene.utils.RetrofitUtil
 
@@ -18,6 +19,11 @@ class ApiModule {
     @Provides
     fun provideService(): BookService {
         return BookService()
+    }
+
+    @Provides
+    fun provideRepository(): Repository {
+        return Repository()
     }
 
 }

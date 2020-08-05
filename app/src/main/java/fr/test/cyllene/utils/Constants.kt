@@ -5,4 +5,5 @@ object Constants {
     const val LOGIN_FAILED = "FAILED"
     const val USERNAME = "USERNAME"
     const val LOGIN = "LOGIN"
+    const val BOOK_ID = "BOOK_ID"
 }

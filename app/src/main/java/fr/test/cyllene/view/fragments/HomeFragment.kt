@@ -14,6 +14,7 @@ import fr.test.cyllene.R
 import fr.test.cyllene.database.BookDao
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.repository.Repository
+import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.view.Application
 import fr.test.cyllene.view.activities.DetailActivity
 import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
@@ -54,7 +55,6 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
     private fun setupViews() {
-        viewModel.getBooks()
         recycler_view_home_horizontal.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = BookListHorizontalAdapter(
@@ -69,15 +69,24 @@ class HomeFragment : Fragment(), ItemListener {
                 this@HomeFragment
             )
         }
-        observeViewModel()
+        loadDataFromDatabase()
+        fetchDataFromServer()
     }
 
-    private fun observeViewModel() {
+    private fun loadDataFromDatabase(){
+        viewModel.getBooks().observe(viewLifecycleOwner,
+            Observer<List<Book>>{list->
+                updateView(list)
+            }
+        )
+    }
+
+    private fun fetchDataFromServer() {
+        viewModel.fetchBooks()
         viewModel.data.observe(viewLifecycleOwner, Observer {
             Thread {
                 viewModel.insertBooks(it)
             }.start()
-            updateView(it)
         })
         viewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
@@ -98,7 +107,9 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
     override fun onClick(position: Int) {
+        val book = (recycler_view_home_vertical.adapter as BookListVerticalAdapter).bookList[position]
         val intent = Intent(activity, DetailActivity::class.java)
+        intent.putExtra(Constants.BOOK_ID, book.id)
         startActivity(intent)
     }
 

@@ -8,7 +8,7 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("Vy0sPkEvO")
-    fun getBooks(): Single<List<Book>>
+    fun fetchBooks(): Single<List<Book>>
 
     @GET("4JcjYCeWY")
     fun getUsers(): Single<List<User>>

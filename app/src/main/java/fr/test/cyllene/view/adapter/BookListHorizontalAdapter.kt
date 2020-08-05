@@ -9,7 +9,7 @@ import fr.test.cyllene.model.Book
 import fr.test.cyllene.utils.loadImage
 import kotlinx.android.synthetic.main.item_book_horizontal.view.*
 
-class BookListHorizontalAdapter (var bookList: List<Book>, private val listener: ItemListener?) : RecyclerView.Adapter<BookListHorizontalAdapter.ViewHolder>() {
+class BookListHorizontalAdapter(var bookList: List<Book>, private val listener: ItemListener) : RecyclerView.Adapter<BookListHorizontalAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
         ViewHolder(
@@ -23,14 +23,14 @@ class BookListHorizontalAdapter (var bookList: List<Book>, private val listener:
         holder.bind(bookList[position])
     }
 
-    class ViewHolder(view : View, private val listener: ItemListener?): RecyclerView.ViewHolder(view), View.OnClickListener{
+    class ViewHolder(view : View, private val listener: ItemListener): RecyclerView.ViewHolder(view), View.OnClickListener{
 
         init {
             view.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            listener?.onClick(layoutPosition)
+            listener.onClick(layoutPosition)
         }
 
         private val imageBook = view.img_book_horizontal

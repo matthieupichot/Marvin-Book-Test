@@ -1,6 +1,7 @@
 package fr.test.cyllene.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.test.cyllene.model.Book
@@ -16,9 +17,9 @@ class HomeViewModel (private var repository: Repository) : ViewModel() {
     val data = MutableLiveData<List<Book>>()
     val error = MutableLiveData<String>()
 
-    fun getBooks(){
+    fun fetchBooks(){
         disposable.add(
-            repository.getBooks()
+            repository.fetchBooks()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Book>>(){
@@ -37,4 +38,7 @@ class HomeViewModel (private var repository: Repository) : ViewModel() {
         repository.insertBooks(list)
     }
 
+    fun getBooks() : LiveData<List<Book>> {
+        return repository.getBooks()
+    }
 }

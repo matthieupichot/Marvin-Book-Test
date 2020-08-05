@@ -2,8 +2,9 @@ package fr.test.cyllene.di.components
 
 import dagger.Component
 import fr.test.cyllene.di.modules.RoomModule
+import fr.test.cyllene.view.activities.DetailActivity
+import fr.test.cyllene.view.fragments.FavoriteFragment
 import fr.test.cyllene.view.fragments.HomeFragment
-import fr.test.cyllene.viewmodel.HomeViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -12,5 +13,7 @@ import javax.inject.Singleton
 interface RoomComponent {
 
     fun inject(homeFragment: HomeFragment)
+    fun inject(favoriteFragment: FavoriteFragment)
+    fun inject(detailActivity: DetailActivity)
 
 }

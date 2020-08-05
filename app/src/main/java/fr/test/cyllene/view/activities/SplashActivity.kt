@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import fr.test.cyllene.R
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.utils.SharedPreferences
@@ -26,7 +25,8 @@ class SplashActivity : Activity() {
             if(sharedPreferences.getLoginStatus(Constants.LOGIN)) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 finish()
-            } else{
+            }
+            else{
                 startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                 finish()
             }

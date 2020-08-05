@@ -3,6 +3,7 @@
     <string name="email">email</string>
     <string name="password">Mot de passe</string>
     <string name="sign_in">Connexion</string>
+    <string name="logout">Se déconnecter</string>
     <string name="book">Livres</string>
     <string name="favorites">Favoris</string>
     <string name="profile">Profil</string>

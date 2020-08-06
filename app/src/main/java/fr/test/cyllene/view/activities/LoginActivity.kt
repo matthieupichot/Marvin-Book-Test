@@ -11,7 +11,7 @@ import fr.test.cyllene.R
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.utils.SharedPreferences
 import fr.test.cyllene.view.Application
-import fr.test.cyllene.viewmodel.LoginViewModel
+import fr.test.cyllene.viewmodel.loginview.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 

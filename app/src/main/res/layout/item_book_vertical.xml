@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/img_book_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="125dp"
         android:src="@drawable/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,6 @@
         android:textSize="20sp"
         android:fontFamily="@font/montserrat"
         android:layout_marginStart="30dp"
-        android:layout_marginEnd="@dimen/home_margin_end"
         app:layout_constraintStart_toEndOf="@+id/img_book_vertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Titre" />

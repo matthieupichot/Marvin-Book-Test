@@ -1,13 +1,13 @@
-package fr.test.cyllene.viewmodel
+package fr.test.cyllene.viewmodel.homeview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import fr.test.cyllene.repository.Repository
 
-class FavoriteViewModelFactory(
+class HomeViewModelFactory(
     private val repository: Repository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        FavoriteViewModel(repository) as T
+        HomeViewModel(repository) as T
 }

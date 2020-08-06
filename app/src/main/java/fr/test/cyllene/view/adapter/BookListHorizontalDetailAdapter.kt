@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.test.cyllene.R
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.utils.loadImage
-import kotlinx.android.synthetic.main.item_book_horizontal.view.*
+import kotlinx.android.synthetic.main.item_book_horizontal_detail.view.*
 
-class BookListHorizontalAdapter(var bookList: List<Book>, private val listener: ItemListener) : RecyclerView.Adapter<BookListHorizontalAdapter.ViewHolder>() {
+class BookListHorizontalDetailAdapter(var bookList: List<Book>, private val listener: ItemListener) : RecyclerView.Adapter<BookListHorizontalDetailAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
         ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_book_horizontal, parent, false),
+            LayoutInflater.from(parent.context).inflate(R.layout.item_book_horizontal_detail, parent, false),
             listener
         )
 
@@ -33,10 +33,10 @@ class BookListHorizontalAdapter(var bookList: List<Book>, private val listener: 
             listener.onClick(layoutPosition)
         }
 
-        private val imageBook = view.img_book_horizontal
+        private var imageBook = view.img_book_horizontal_detail
 
         fun bind(book: Book){
-            imageBook.loadImage(book.imageUrl, 400, 800)
+            imageBook.loadImage(book.imageUrl)
         }
     }
 

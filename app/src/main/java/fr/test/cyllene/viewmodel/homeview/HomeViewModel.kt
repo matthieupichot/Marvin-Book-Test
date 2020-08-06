@@ -1,4 +1,4 @@
-package fr.test.cyllene.viewmodel
+package fr.test.cyllene.viewmodel.homeview
 
 import android.util.Log
 import androidx.lifecycle.LiveData

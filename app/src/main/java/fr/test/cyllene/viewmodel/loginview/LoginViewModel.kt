@@ -1,4 +1,4 @@
-package fr.test.cyllene.viewmodel
+package fr.test.cyllene.viewmodel.loginview
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

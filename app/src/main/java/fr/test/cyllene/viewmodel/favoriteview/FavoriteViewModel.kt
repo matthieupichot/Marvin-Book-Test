@@ -1,4 +1,4 @@
-package fr.test.cyllene.viewmodel
+package fr.test.cyllene.viewmodel.favoriteview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

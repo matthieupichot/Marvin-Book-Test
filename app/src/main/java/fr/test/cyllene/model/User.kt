@@ -2,7 +2,7 @@ package fr.test.cyllene.model
 
 import com.google.gson.annotations.SerializedName
 
-class User (
+data class User (
 
     @SerializedName("email")
     val email: String,

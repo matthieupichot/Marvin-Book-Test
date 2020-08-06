@@ -1,4 +1,4 @@
-package fr.test.cyllene.viewmodel
+package fr.test.cyllene.viewmodel.detailview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

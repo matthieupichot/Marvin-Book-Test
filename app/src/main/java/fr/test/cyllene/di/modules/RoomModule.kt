@@ -16,7 +16,7 @@ class RoomModule constructor(private val context: Context) {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "db")
+            "database")
             .build()
     }
 

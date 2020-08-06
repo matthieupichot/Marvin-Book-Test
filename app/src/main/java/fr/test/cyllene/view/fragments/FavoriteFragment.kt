@@ -18,8 +18,8 @@ import fr.test.cyllene.view.Application
 import fr.test.cyllene.view.activities.DetailActivity
 import fr.test.cyllene.view.adapter.BookListVerticalAdapter
 import fr.test.cyllene.view.adapter.ItemListener
-import fr.test.cyllene.viewmodel.FavoriteViewModel
-import fr.test.cyllene.viewmodel.FavoriteViewModelFactory
+import fr.test.cyllene.viewmodel.favoriteview.FavoriteViewModel
+import fr.test.cyllene.viewmodel.detailview.FavoriteViewModelFactory
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import javax.inject.Inject
 
@@ -55,8 +55,7 @@ class FavoriteFragment : Fragment(), ItemListener {
         recycler_view_favorite.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = BookListVerticalAdapter(
-                emptyList()
-                ,
+                emptyList(),
                 this@FavoriteFragment
             )
         }

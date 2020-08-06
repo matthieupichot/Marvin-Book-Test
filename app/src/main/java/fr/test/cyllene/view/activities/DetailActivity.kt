@@ -1,7 +1,6 @@
 package fr.test.cyllene.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,10 +13,10 @@ import fr.test.cyllene.repository.Repository
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.utils.loadImage
 import fr.test.cyllene.view.Application
-import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
+import fr.test.cyllene.view.adapter.BookListHorizontalDetailAdapter
 import fr.test.cyllene.view.adapter.ItemListener
-import fr.test.cyllene.viewmodel.DetailViewModel
-import fr.test.cyllene.viewmodel.DetailViewModelFactory
+import fr.test.cyllene.viewmodel.detailview.DetailViewModel
+import fr.test.cyllene.viewmodel.detailview.DetailViewModelFactory
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
@@ -61,7 +60,7 @@ class DetailActivity : AppCompatActivity(), ItemListener {
     private fun updateRecyclerView(bookList : List<Book>) {
         recycler_view_detail_activity.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = BookListHorizontalAdapter(
+            adapter = BookListHorizontalDetailAdapter(
                 bookList,
                 this@DetailActivity
             )
@@ -69,7 +68,7 @@ class DetailActivity : AppCompatActivity(), ItemListener {
     }
 
     private fun updateBookView(book: Book) {
-        image_book_detail.loadImage(book.imageUrl, 400, 800)
+        image_book_detail.loadImage(book.imageUrl)
         txt_title_detail.text = getString(R.string.book_title, book.volume.toString(), book.title)
         txt_author_detail.text = book.author
 

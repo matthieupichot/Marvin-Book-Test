@@ -17,11 +17,11 @@ import fr.test.cyllene.repository.Repository
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.view.Application
 import fr.test.cyllene.view.activities.DetailActivity
-import fr.test.cyllene.view.adapter.BookListHorizontalAdapter
+import fr.test.cyllene.view.adapter.BookListHorizontalHomeAdapter
 import fr.test.cyllene.view.adapter.BookListVerticalAdapter
 import fr.test.cyllene.view.adapter.ItemListener
-import fr.test.cyllene.viewmodel.HomeViewModel
-import fr.test.cyllene.viewmodel.HomeViewModelFactory
+import fr.test.cyllene.viewmodel.homeview.HomeViewModel
+import fr.test.cyllene.viewmodel.homeview.HomeViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), ItemListener {
     private fun setupViews() {
         recycler_view_home_horizontal.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = BookListHorizontalAdapter(
+            adapter = BookListHorizontalHomeAdapter(
                 emptyList(),
                 this@HomeFragment
             )
@@ -95,7 +95,7 @@ class HomeFragment : Fragment(), ItemListener {
 
     private fun updateView(bookList : List<Book>) {
         recycler_view_home_horizontal.adapter =
-            BookListHorizontalAdapter(
+            BookListHorizontalHomeAdapter(
                 bookList,
                 this
             )

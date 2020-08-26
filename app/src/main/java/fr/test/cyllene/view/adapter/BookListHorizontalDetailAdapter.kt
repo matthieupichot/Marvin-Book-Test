@@ -36,7 +36,7 @@ class BookListHorizontalDetailAdapter(var bookList: List<Book>, private val list
         private var imageBook = view.img_book_horizontal_detail
 
         fun bind(book: Book){
-            imageBook.loadImage(book.imageUrl)
+            loadImage(book, imageBook, imageBook.context)
         }
     }
 

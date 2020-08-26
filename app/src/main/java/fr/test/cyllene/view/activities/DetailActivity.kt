@@ -68,7 +68,7 @@ class DetailActivity : AppCompatActivity(), ItemListener {
     }
 
     private fun updateBookView(book: Book) {
-        image_book_detail.loadImage(book.imageUrl)
+        loadImage(book, image_book_detail, this)
         txt_title_detail.text = getString(R.string.book_title, book.volume.toString(), book.title)
         txt_author_detail.text = book.author
 

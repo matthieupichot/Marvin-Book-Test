@@ -104,6 +104,7 @@ class HomeFragment : Fragment(), ItemListener {
                 bookList,
                 this
             )
+        txt_best_seller.text = context?.getString(R.string.best_seller)
     }
 
     override fun onClick(position: Int) {

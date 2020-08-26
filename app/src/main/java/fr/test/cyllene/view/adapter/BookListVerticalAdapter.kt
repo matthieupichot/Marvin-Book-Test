@@ -38,7 +38,7 @@ class BookListVerticalAdapter (var bookList: List<Book>, private val listener: I
         private val author = view.author
 
         fun bind(book: Book){
-            image.loadImage(book.imageUrl)
+            loadImage(book, image, image.context)
             title.text = itemView.context.getString(R.string.book_title, book.volume.toString(), book.title)
             author.text = book.author
         }

@@ -1,6 +1,5 @@
 package fr.test.cyllene.viewmodel.homeview
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +26,6 @@ class HomeViewModel (private var repository: Repository) : ViewModel() {
                         data.postValue(value)
                     }
                     override fun onError(e: Throwable) {
-                        Log.d("HomeViewModel", e.message + e.cause)
                         error.postValue(e.message + e.cause)
                     }
                 })

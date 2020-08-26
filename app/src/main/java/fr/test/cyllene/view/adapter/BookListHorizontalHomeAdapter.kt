@@ -36,7 +36,7 @@ class BookListHorizontalHomeAdapter(var bookList: List<Book>, private val listen
         private var imageBook = view.img_book_horizontal_home
 
         fun bind(book: Book){
-            imageBook.loadImage(book.imageUrl)
+            loadImage(book, imageBook, imageBook.context)
         }
     }
 

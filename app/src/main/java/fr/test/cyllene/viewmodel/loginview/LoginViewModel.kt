@@ -1,5 +1,6 @@
 package fr.test.cyllene.viewmodel.loginview
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.test.cyllene.api.BookService
@@ -27,16 +28,18 @@ class LoginViewModel : ViewModel() {
 
     fun login(email: String, password: String, sharedPreferences : SharedPreferences){
         disposable.add(
-            bookService.api.getUsers()
+            bookService.api.getUsers(Constants.TOKEN)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<User>>(){
                     override fun onSuccess(value: List<User>) {
+                        Log.d("MONTEST", value.toString());
                         if(isCredentialsValid(email, password, value, sharedPreferences)) login.postValue(Constants.LOGIN_SUCCESSFUL)
                         else login.postValue(Constants.LOGIN_FAILED)
                     }
                     override fun onError(e: Throwable) {
                         login.postValue(Constants.LOGIN_FAILED)
+                        Log.d("MONTEST", "OnError : $e");
                     }
                 })
         )

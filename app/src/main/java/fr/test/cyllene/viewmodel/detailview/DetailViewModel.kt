@@ -8,7 +8,7 @@ import fr.test.cyllene.repository.Repository
 
 class DetailViewModel (private var repository: Repository) : ViewModel() {
 
-    fun getBookById(id: String): LiveData <Book> {
+    fun getBookById(id: Int): LiveData <Book> {
         return repository.getBookById(id)
     }
 
@@ -20,11 +20,11 @@ class DetailViewModel (private var repository: Repository) : ViewModel() {
         repository.insertFavorite(favorite)
     }
 
-    fun isFavoriteRowExist(bookId : String) : Boolean{
+    fun isFavoriteRowExist(bookId : Int) : Boolean{
         return  repository.isFavoriteRowExist(bookId)
     }
 
-    fun deleteFavorite(bookId : String){
+    fun deleteFavorite(bookId : Int){
         repository.deleteFavorite(bookId)
     }
 

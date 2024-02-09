@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.repository.Repository
+import fr.test.cyllene.utils.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -18,7 +19,7 @@ class HomeViewModel (private var repository: Repository) : ViewModel() {
 
     fun fetchBooks(){
         disposable.add(
-            repository.fetchBooks()
+            repository.fetchBooks(Constants.TOKEN)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Book>>(){

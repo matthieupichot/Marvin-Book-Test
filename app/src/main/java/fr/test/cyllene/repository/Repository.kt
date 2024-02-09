@@ -22,7 +22,7 @@ class Repository ( private val bookDao : BookDao) {
         bookDao.insertBooks(book)
     }
 
-    fun getBookById(id: String) : LiveData <Book> {
+    fun getBookById(id: Int) : LiveData <Book> {
         return bookDao.getBookById(id)
     }
 
@@ -34,11 +34,11 @@ class Repository ( private val bookDao : BookDao) {
         bookDao.insertFavorite(favorite)
     }
 
-    fun isFavoriteRowExist(bookId : String) : Boolean{
+    fun isFavoriteRowExist(bookId : Int) : Boolean{
         return bookDao.isFavoriteRowExist(bookId)
     }
 
-    fun deleteFavorite(bookId : String){
+    fun deleteFavorite(bookId : Int){
         bookDao.deleteFavorite(bookId)
     }
 
@@ -46,8 +46,8 @@ class Repository ( private val bookDao : BookDao) {
         return bookDao.getFavoriteList()
     }
 
-    fun fetchBooks() : Single<List<Book>> {
-        return bookService.api.fetchBooks()
+    fun fetchBooks(token : String) : Single<List<Book>> {
+        return bookService.api.fetchBooks(token)
     }
 
 }

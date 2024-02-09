@@ -2,6 +2,7 @@ package fr.test.cyllene.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -109,6 +110,9 @@ class HomeFragment : Fragment(), ItemListener {
 
     override fun onClick(position: Int) {
         val book = (recycler_view_home_vertical.adapter as BookListVerticalAdapter).bookList[position]
+
+        Log.d("MONTEST", "BOOK : $book")
+
         val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra(Constants.BOOK_ID, book.id)
         startActivity(intent)

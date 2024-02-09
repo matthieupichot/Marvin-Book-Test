@@ -6,7 +6,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitUtil {
-    private const val BASE_URL = "https://next.json-generator.com/api/json/get/"
+    private const val BASE_URL = "https://api.json-generator.com/templates/"
 
     fun createApiService(): ApiService {
 

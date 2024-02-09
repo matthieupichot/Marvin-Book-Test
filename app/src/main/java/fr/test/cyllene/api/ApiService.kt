@@ -4,13 +4,13 @@ import fr.test.cyllene.model.Book
 import fr.test.cyllene.model.User
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("Vy0sPkEvO")
-    fun fetchBooks(): Single<List<Book>>
+    @GET("5xNfZ_KhwYdB/data")
+    fun fetchBooks(@Query("access_token") access_token : String): Single<List<Book>>
 
-    @GET("4JcjYCeWY")
-    fun getUsers(): Single<List<User>>
-
+    @GET("B0aKmVbAqhVw/data")
+    fun getUsers(@Query("access_token") access_token : String): Single<List<User>>
 }

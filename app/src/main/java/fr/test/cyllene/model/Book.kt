@@ -1,15 +1,18 @@
 package fr.test.cyllene.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity
+@Entity (
+    indices = [Index(value = ["title"],
+        unique = true)]
+)
 data class Book (
 
-    @PrimaryKey
-    @SerializedName("id")
-    val id : String,
+    @PrimaryKey(autoGenerate = true)
+    val id : Int,
     @SerializedName("volume")
     val volume: Int,
     @SerializedName("title")

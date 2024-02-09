@@ -1,6 +1,7 @@
 package fr.test.cyllene.view.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -43,7 +44,10 @@ class DetailActivity : AppCompatActivity(), ItemListener {
     }
 
     private fun setupViews() {
-        intent.extras?.getString(Constants.BOOK_ID)?.let {
+        Log.d("MONTEST", "ID : " + intent.extras?.getInt(Constants.BOOK_ID))
+
+
+        intent.extras?.getInt(Constants.BOOK_ID)?.let {
             viewModel.getBookById(it).observe(this,
                 Observer<Book>{book->
                     updateBookView(book)

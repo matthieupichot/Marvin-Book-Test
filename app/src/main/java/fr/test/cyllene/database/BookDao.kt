@@ -15,7 +15,7 @@ interface BookDao {
     fun getBooks() : LiveData <List<Book>>
 
     @Query("SELECT * FROM book WHERE id = :id")
-    fun getBookById(id: String) : LiveData <Book>
+    fun getBookById(id: Int) : LiveData <Book>
 
     @Query("SELECT * FROM book INNER JOIN favorite ON Book.id = favorite.bookId")
     fun getFavoriteList() : LiveData <List<Book>>
@@ -24,9 +24,9 @@ interface BookDao {
     fun insertFavorite(favorite: Favorite)
 
     @Query("DELETE FROM favorite WHERE bookId = :bookId")
-    fun deleteFavorite(bookId : String)
+    fun deleteFavorite(bookId : Int)
 
     @Query("SELECT EXISTS(SELECT * FROM favorite WHERE bookId = :bookId)")
-    fun isFavoriteRowExist(bookId : String) : Boolean
+    fun isFavoriteRowExist(bookId : Int) : Boolean
 
 }

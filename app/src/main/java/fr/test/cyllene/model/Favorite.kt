@@ -10,6 +10,6 @@ data class Favorite (
     @PrimaryKey(autoGenerate = true)
     var idFavorite : Int,
     @ForeignKey(entity = Book::class, parentColumns = ["id"], childColumns = ["bookId"])
-    var bookId : String
+    var bookId : Int
 
 )

@@ -4,18 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import fr.test.cyllene.R
+import fr.test.cyllene.databinding.ItemBookHorizontalHomeBinding
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.utils.loadImage
-import kotlinx.android.synthetic.main.item_book_horizontal_home.view.*
 
 class BookListHorizontalHomeAdapter(var bookList: List<Book>, private val listener: ItemListener) : RecyclerView.Adapter<BookListHorizontalHomeAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_book_horizontal_home, parent, false),
-            listener
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
+        val binding = ItemBookHorizontalHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, listener)
+    }
 
     override fun getItemCount() = bookList.size
 
@@ -23,17 +21,17 @@ class BookListHorizontalHomeAdapter(var bookList: List<Book>, private val listen
         holder.bind(bookList[position])
     }
 
-    class ViewHolder(view : View, private val listener: ItemListener): RecyclerView.ViewHolder(view), View.OnClickListener{
+    class ViewHolder(binding : ItemBookHorizontalHomeBinding, private val listener: ItemListener): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
         init {
-            view.setOnClickListener(this)
+            binding.root.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             listener.onClick(layoutPosition)
         }
 
-        private var imageBook = view.img_book_horizontal_home
+        private var imageBook = binding.imgBookHorizontalHome
 
         fun bind(book: Book){
             loadImage(book, imageBook, imageBook.context)

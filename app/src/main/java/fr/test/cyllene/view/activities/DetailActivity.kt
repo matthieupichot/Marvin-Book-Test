@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.test.cyllene.R
 import fr.test.cyllene.database.BookDao
+import fr.test.cyllene.databinding.ActivityDetailBinding
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.model.Favorite
 import fr.test.cyllene.repository.Repository
@@ -18,20 +19,22 @@ import fr.test.cyllene.view.adapter.BookListHorizontalDetailAdapter
 import fr.test.cyllene.view.adapter.ItemListener
 import fr.test.cyllene.viewmodel.detailview.DetailViewModel
 import fr.test.cyllene.viewmodel.detailview.DetailViewModelFactory
-import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
 
 class DetailActivity : AppCompatActivity(), ItemListener {
 
     private lateinit var viewModel: DetailViewModel
+    private lateinit var binding: ActivityDetailBinding
 
     @Inject
     lateinit var bookDao: BookDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         Application.roomComponent.inject(this)
         val factory =
             DetailViewModelFactory(
@@ -62,7 +65,7 @@ class DetailActivity : AppCompatActivity(), ItemListener {
     }
 
     private fun updateRecyclerView(bookList : List<Book>) {
-        recycler_view_detail_activity.apply {
+        binding.recyclerViewDetailActivity.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = BookListHorizontalDetailAdapter(
                 bookList,
@@ -72,19 +75,19 @@ class DetailActivity : AppCompatActivity(), ItemListener {
     }
 
     private fun updateBookView(book: Book) {
-        loadImage(book, image_book_detail, this)
-        txt_title_detail.text = getString(R.string.book_title, book.volume.toString(), book.title)
-        txt_author_detail.text = book.author
+        loadImage(book, binding.imageBookDetail, this)
+        binding.txtTitleDetail.text = getString(R.string.book_title, book.volume.toString(), book.title)
+        binding.txtAuthorDetail.text = book.author
 
         Thread {
             if(!viewModel.isFavoriteRowExist(book.id)){
-                image_favorite_detail.setImageResource(R.drawable.ic_saved_default)
+                binding.imageFavoriteDetail.setImageResource(R.drawable.ic_saved_default)
             }  else {
-                image_favorite_detail.setImageResource(R.drawable.ic_saved_selected)
+                binding.imageFavoriteDetail.setImageResource(R.drawable.ic_saved_selected)
             }
         }.start()
 
-        image_favorite_detail.setOnClickListener {
+        binding.imageFavoriteDetail.setOnClickListener {
             addOrRemoveFromFavorite(book)
         }
     }
@@ -93,10 +96,10 @@ class DetailActivity : AppCompatActivity(), ItemListener {
         Thread {
             if(!viewModel.isFavoriteRowExist(book.id)){
                 viewModel.insertFavorite(Favorite(idFavorite = 0, bookId = book.id))
-                image_favorite_detail.setImageResource(R.drawable.ic_saved_selected)
+                binding.imageFavoriteDetail.setImageResource(R.drawable.ic_saved_selected)
             } else {
                 viewModel.deleteFavorite(book.id)
-                image_favorite_detail.setImageResource(R.drawable.ic_saved_default)
+                binding.imageFavoriteDetail.setImageResource(R.drawable.ic_saved_default)
             }
         }.start()
     }

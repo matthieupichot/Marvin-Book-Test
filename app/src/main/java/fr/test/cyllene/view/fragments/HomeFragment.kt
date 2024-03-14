@@ -2,7 +2,6 @@ package fr.test.cyllene.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.test.cyllene.R
 import fr.test.cyllene.database.BookDao
+import fr.test.cyllene.databinding.FragmentHomeBinding
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.repository.Repository
 import fr.test.cyllene.utils.Constants
@@ -23,24 +23,26 @@ import fr.test.cyllene.view.adapter.BookListVerticalAdapter
 import fr.test.cyllene.view.adapter.ItemListener
 import fr.test.cyllene.viewmodel.homeview.HomeViewModel
 import fr.test.cyllene.viewmodel.homeview.HomeViewModelFactory
-import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
-
 
 class HomeFragment : Fragment(), ItemListener {
 
+    private var _binding: FragmentHomeBinding? = null
     private lateinit var viewModel: HomeViewModel
 
     @Inject
     lateinit var bookDao: BookDao
+
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Application.roomComponent.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
@@ -56,14 +58,14 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
     private fun setupViews() {
-        recycler_view_home_horizontal.apply {
+        binding.recyclerViewHomeHorizontal.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = BookListHorizontalHomeAdapter(
                 emptyList(),
                 this@HomeFragment
             )
         }
-        recycler_view_home_vertical.apply {
+        binding.recyclerViewHomeVertical.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = BookListVerticalAdapter(
                 emptyList(),
@@ -95,27 +97,29 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
     private fun updateView(bookList : List<Book>) {
-        recycler_view_home_horizontal.adapter =
+        binding.recyclerViewHomeHorizontal.adapter =
             BookListHorizontalHomeAdapter(
                 bookList,
                 this
             )
-        recycler_view_home_vertical.adapter =
+        binding.recyclerViewHomeVertical.adapter =
             BookListVerticalAdapter(
                 bookList,
                 this
             )
-        txt_best_seller.text = context?.getString(R.string.best_seller)
+        binding.txtBestSeller.text = context?.getString(R.string.best_seller)
     }
 
     override fun onClick(position: Int) {
-        val book = (recycler_view_home_vertical.adapter as BookListVerticalAdapter).bookList[position]
-
-        Log.d("MONTEST", "BOOK : $book")
-
+        val book = (binding.recyclerViewHomeVertical.adapter as BookListVerticalAdapter).bookList[position]
         val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra(Constants.BOOK_ID, book.id)
         startActivity(intent)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

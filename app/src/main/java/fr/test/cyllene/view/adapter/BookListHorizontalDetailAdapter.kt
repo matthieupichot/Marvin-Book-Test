@@ -4,18 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import fr.test.cyllene.R
+import fr.test.cyllene.databinding.ItemBookHorizontalDetailBinding
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.utils.loadImage
-import kotlinx.android.synthetic.main.item_book_horizontal_detail.view.*
 
 class BookListHorizontalDetailAdapter(var bookList: List<Book>, private val listener: ItemListener) : RecyclerView.Adapter<BookListHorizontalDetailAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_book_horizontal_detail, parent, false),
-            listener
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
+        val binding = ItemBookHorizontalDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, listener)
+    }
 
     override fun getItemCount() = bookList.size
 
@@ -23,17 +21,17 @@ class BookListHorizontalDetailAdapter(var bookList: List<Book>, private val list
         holder.bind(bookList[position])
     }
 
-    class ViewHolder(view : View, private val listener: ItemListener): RecyclerView.ViewHolder(view), View.OnClickListener{
+    class ViewHolder(binding: ItemBookHorizontalDetailBinding, private val listener: ItemListener): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
         init {
-            view.setOnClickListener(this)
+            binding.root.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             listener.onClick(layoutPosition)
         }
 
-        private var imageBook = view.img_book_horizontal_detail
+        private var imageBook = binding.imgBookHorizontalDetail
 
         fun bind(book: Book){
             loadImage(book, imageBook, imageBook.context)

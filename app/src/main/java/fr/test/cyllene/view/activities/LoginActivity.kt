@@ -8,23 +8,26 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import fr.test.cyllene.R
+import fr.test.cyllene.databinding.ActivityLoginBinding
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.utils.SharedPreferences
 import fr.test.cyllene.view.Application
 import fr.test.cyllene.viewmodel.loginview.LoginViewModel
-import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
     lateinit var viewModel: LoginViewModel
+    private lateinit var binding: ActivityLoginBinding
 
     @Inject
     lateinit var sharedPreferences : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         (application as Application).sharedPreferencesComponent?.inject(this)
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         setupViews()
@@ -32,8 +35,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupViews() {
         observeViewModel()
-        btn_sign_in.setOnClickListener {
-            viewModel.login(et_email.text.toString().trim(), et_password.text.toString().trim(), sharedPreferences)
+        binding.btnSignIn.setOnClickListener {
+            viewModel.login(binding.etEmail.text.toString().trim(), binding.etPassword.text.toString().trim(), sharedPreferences)
         }
     }
 

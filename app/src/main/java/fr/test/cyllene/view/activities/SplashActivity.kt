@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import fr.test.cyllene.R
+import fr.test.cyllene.databinding.ActivitySplashBinding
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.utils.SharedPreferences
 import fr.test.cyllene.view.Application
@@ -15,9 +15,13 @@ class SplashActivity : Activity() {
     @Inject
     lateinit var sharedPreferences : SharedPreferences
 
+    private lateinit var binding: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         (application as Application).sharedPreferencesComponent?.inject(this)
 

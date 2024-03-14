@@ -8,16 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import fr.test.cyllene.R
+import fr.test.cyllene.databinding.FragmentProfileBinding
 import fr.test.cyllene.utils.Constants
 import fr.test.cyllene.view.activities.LoginActivity
-import kotlinx.android.synthetic.main.fragment_profile.*
-
 
 class ProfileFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
@@ -29,11 +31,11 @@ class ProfileFragment : Fragment() {
     private fun setupViews(){
 
         val preferences: SharedPreferences =
-            this.activity!!.getSharedPreferences("ApplicationPreferences", Context.MODE_PRIVATE)
+            this.requireActivity().getSharedPreferences("ApplicationPreferences", Context.MODE_PRIVATE)
 
-        txt_username.text = preferences.getString(Constants.USERNAME, null)
+        binding.txtUsername.text = preferences.getString(Constants.USERNAME, null)
 
-        btn_logout.setOnClickListener {
+        binding.btnLogout.setOnClickListener {
             preferences.edit()
                 .putBoolean(Constants.LOGIN, false)
                 .apply()
@@ -41,6 +43,11 @@ class ProfileFragment : Fragment() {
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

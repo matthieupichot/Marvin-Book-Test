@@ -6,31 +6,33 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.test.cyllene.R
+import fr.test.cyllene.databinding.ActivityMainBinding
 import fr.test.cyllene.utils.SharedPreferences
 import fr.test.cyllene.view.Application
 import fr.test.cyllene.view.fragments.FavoriteFragment
 import fr.test.cyllene.view.fragments.HomeFragment
 import fr.test.cyllene.view.fragments.ProfileFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedPreferences : SharedPreferences
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         (application as Application).sharedPreferencesComponent?.inject(this)
         if (savedInstanceState == null) {
             val fragment = HomeFragment()
             loadFragment(fragment)
         }
 
-        bottom_navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
-
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
     }
 
     private fun loadFragment(fragment: Fragment) {

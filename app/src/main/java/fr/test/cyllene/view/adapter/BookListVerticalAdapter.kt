@@ -5,17 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.test.cyllene.R
+import fr.test.cyllene.databinding.ItemBookVerticalBinding
 import fr.test.cyllene.model.Book
 import fr.test.cyllene.utils.loadImage
-import kotlinx.android.synthetic.main.item_book_vertical.view.*
 
 class BookListVerticalAdapter (var bookList: List<Book>, private val listener: ItemListener) : RecyclerView.Adapter<BookListVerticalAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_book_vertical, parent, false),
-            listener
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
+        val binding = ItemBookVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, listener)
+    }
 
     override fun getItemCount() = bookList.size
 
@@ -23,19 +22,19 @@ class BookListVerticalAdapter (var bookList: List<Book>, private val listener: I
         holder.bind(bookList[position])
     }
 
-    class ViewHolder(view : View, private val listener: ItemListener): RecyclerView.ViewHolder(view), View.OnClickListener{
+    class ViewHolder(binding : ItemBookVerticalBinding, private val listener: ItemListener): RecyclerView.ViewHolder(binding.root), View.OnClickListener{
 
         init {
-            view.setOnClickListener(this)
+            binding.root.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             listener.onClick(layoutPosition)
         }
 
-        private val image = view.img_book_vertical
-        private val title = view.title
-        private val author = view.author
+        private val image = binding.imgBookVertical
+        private val title = binding.title
+        private val author = binding.author
 
         fun bind(book: Book){
             loadImage(book, image, image.context)

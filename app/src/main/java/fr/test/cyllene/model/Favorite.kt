@@ -4,12 +4,10 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(foreignKeys = [ForeignKey(entity = Book::class, parentColumns = ["id"], childColumns = ["bookId"])])
 data class Favorite (
 
     @PrimaryKey(autoGenerate = true)
     var idFavorite : Int,
-    @ForeignKey(entity = Book::class, parentColumns = ["id"], childColumns = ["bookId"])
     var bookId : Int
-
 )
